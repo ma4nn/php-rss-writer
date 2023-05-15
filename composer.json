@@ -1,5 +1,5 @@
 {
-  "name": "suin/php-rss-writer",
+  "name": "ma4nn/php-rss-writer",
   "type": "library",
   "description": "Yet another simple RSS writer library.",
   "keywords": [
@@ -9,16 +9,22 @@
     "feed",
     "php"
   ],
-  "homepage": "https://github.com/suin/php-rss-writer",
+  "homepage": "https://github.com/ma4nn/php-rss-writer",
   "license": "MIT",
   "authors": [
     {
       "name": "suin",
       "email": "suinyeze@gmail.com"
+    },
+    {
+      "name": "Christoph Massmann",
+      "email": "cm@vianetz.com"
     }
   ],
   "require": {
-    "php": "^7.4 || ^8.0"
+    "php": "^8.0",
+    "ext-simplexml": "*",
+    "ext-dom": "*"
   },
   "require-dev": {
     "phpunit/phpunit": "^8",
