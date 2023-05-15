@@ -4,15 +4,7 @@
 
 This library can also be used to publish Podcasts.
 
-[![Latest Stable Version](https://poser.pugx.org/suin/php-rss-writer/v/stable)](https://packagist.org/packages/suin/php-rss-writer)
-[![Total Downloads](https://poser.pugx.org/suin/php-rss-writer/downloads)](https://packagist.org/packages/suin/php-rss-writer)
-[![Daily Downloads](https://poser.pugx.org/suin/php-rss-writer/d/daily)](https://packagist.org/packages/suin/php-rss-writer)
-[![License](https://poser.pugx.org/suin/php-rss-writer/license)](https://packagist.org/packages/suin/php-rss-writer)
-[![Build Status](https://travis-ci.org/suin/php-rss-writer.svg?branch=master)](https://travis-ci.org/suin/php-rss-writer)
-[![Codacy Badge](https://api.codacy.com/project/badge/grade/1c5e4e28e7e24f6ab7221b2166b5b6c7)](https://www.codacy.com/app/suinyeze/php-rss-writer)
-
 ## Quick demo
-
 
 ```php
 $feed = new Feed();
@@ -98,31 +90,7 @@ Output:
 You can install directly via [Composer](https://getcomposer.org/):
 
 ```bash
-$ composer require suin/php-rss-writer
-```
-
-### Manual installation
-
-Add the following code to your `composer.json` file:
-
-```json
-{
-	"require": {
-		"suin/php-rss-writer": ">=1.0"
-	}
-}
-```
-
-...and run composer to install it:
-
-```bash
-$ composer install
-```
-
-Finally, include `vendor/autoload.php` in your product:
-
-```php
-require_once 'vendor/autoload.php';
+$ composer require ma4nn/php-rss-writer
 ```
 
 ## How to use

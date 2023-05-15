@@ -14,11 +14,13 @@
   "authors": [
     {
       "name": "suin",
-      "email": "suinyeze@gmail.com"
+      "email": "suinyeze@gmail.com",
+      "role": "Author"
     },
     {
       "name": "Christoph Massmann",
-      "email": "cm@vianetz.com"
+      "email": "cm@vianetz.com",
+      "role": "Developer"
     }
   ],
   "require": {
