@@ -1,8 +1,10 @@
 # \Suin\RSSWriter
 
-`\Suin\RSSWriter` is yet another simple RSS writer library for PHP 5.4 or later. This component is Licensed under MIT license.
+`\Suin\RSSWriter` is yet another simple RSS writer library for PHP. This component is Licensed under MIT license.
 
 This library can also be used to publish Podcasts.
+
+This fork of [the original package](https://github.com/suin/php-rss-writer) mainly raises the PHP compatibility level to >= 8.1.
 
 ## Quick demo
 
@@ -87,7 +89,7 @@ Output:
 
 ### Easy installation
 
-You can install directly via [Composer](https://getcomposer.org/):
+You can install directly via [composer](https://getcomposer.org/):
 
 ```bash
 $ composer require ma4nn/php-rss-writer
@@ -105,7 +107,7 @@ If you want to know APIs, please see [`FeedInterface`](src/Suin/RSSWriter/FeedIn
 $ vendor/bin/phpunit
 ```
 
-## Test through PHP 7.4
+## Test older PHP versions with Docker
 
 ```console
 $ docker-compose up
