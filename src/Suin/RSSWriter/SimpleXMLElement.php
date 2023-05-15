@@ -1,40 +1,29 @@
 <?php
+declare(strict_types=1);
 
 namespace Suin\RSSWriter;
 
 /**
- * Class SimpleXMLElement
  * @package Suin\RSSWriter
  */
 class SimpleXMLElement extends \SimpleXMLElement
 {
-    /**
-     * @param string $name
-     * @param string $value
-     * @param string $namespace
-     * @return \SimpleXMLElement
-     */
-    public function addChild($name, $value = null, $namespace = null)
+    public function addChild(string $qualifiedName, ?string $value = null, ?string $namespace = null): ?static
     {
-        if ($value !== null and is_string($value) === true) {
+        if ($value !== null) {
             $value = str_replace('&', '&amp;', $value);
         }
 
-        return parent::addChild($name, $value, $namespace);
+        return parent::addChild($qualifiedName, $value, $namespace);
     }
 
-    /**
-     * @param string $name
-     * @param string $value
-     * @param string $namespace
-     * @return \SimpleXMLElement
-     */
-    public function addCdataChild($name, $value = null, $namespace = null)
+    public function addCdataChild(string $name, string $value = null, string $namespace = null): self
     {
         $element = $this->addChild($name, null, $namespace);
         $dom = dom_import_simplexml($element);
         $elementOwner = $dom->ownerDocument;
         $dom->appendChild($elementOwner->createCDATASection($value));
+
         return $element;
     }
 }

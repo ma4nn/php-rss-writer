@@ -185,7 +185,9 @@ class Channel implements ChannelInterface
 
     /**
      * Return XML object
+     *
      * @return SimpleXMLElement
+     * @throws \Exception
      */
     public function asXML()
     {

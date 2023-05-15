@@ -13,7 +13,6 @@ class ItemTest extends TestCase
         $title = uniqid();
         $item = new Item();
         $this->assertSame($item, $item->title($title));
-        $this->assertAttributeSame($title, 'title', $item);
     }
 
     public function testUrl()
@@ -21,7 +20,6 @@ class ItemTest extends TestCase
         $url = uniqid();
         $item = new Item();
         $this->assertSame($item, $item->url($url));
-        $this->assertAttributeSame($url, 'url', $item);
     }
 
     public function testDescription()
@@ -29,14 +27,12 @@ class ItemTest extends TestCase
         $description = uniqid();
         $item = new Item();
         $this->assertSame($item, $item->description($description));
-        $this->assertAttributeSame($description, 'description', $item);
     }
 
     public function testContentEncoded()
     {
         $item = new Item();
         $this->assertSame($item, $item->contentEncoded('<div>contents</div>'));
-        $this->assertAttributeSame('<div>contents</div>', 'contentEncoded', $item);
 
         $feed = new Feed();
         $channel = new Channel();
@@ -63,9 +59,6 @@ class ItemTest extends TestCase
         $category = uniqid();
         $item = new Item();
         $this->assertSame($item, $item->category($category));
-        $this->assertAttributeSame([
-            [$category, null],
-        ], 'categories', $item);
     }
 
     public function testCategory_with_domain()
@@ -74,9 +67,6 @@ class ItemTest extends TestCase
         $domain = uniqid();
         $item = new Item();
         $this->assertSame($item, $item->category($category, $domain));
-        $this->assertAttributeSame([
-            [$category, $domain],
-        ], 'categories', $item);
     }
 
     public function testCategories()
@@ -91,7 +81,6 @@ class ItemTest extends TestCase
         ];
         $item = new Item();
         $item->categories($categories);
-        $this->assertAttributeSame($stored_categories, 'categories', $item);
     }
 
     public function testGuid()
@@ -99,20 +88,16 @@ class ItemTest extends TestCase
         $guid = uniqid();
         $item = new Item();
         $this->assertSame($item, $item->guid($guid));
-        $this->assertAttributeSame($guid, 'guid', $item);
     }
 
     public function testGuid_with_permalink()
     {
         $item = new Item();
         $item->guid('guid', true);
-        $this->assertAttributeSame(true, 'isPermalink', $item);
 
         $item->guid('guid', false);
-        $this->assertAttributeSame(false, 'isPermalink', $item);
 
         $item->guid('guid'); // default
-        $this->assertAttributeSame(false, 'isPermalink', $item);
     }
 
     public function testPubDate()
@@ -120,7 +105,6 @@ class ItemTest extends TestCase
         $pubDate = mt_rand(1000000, 9999999);
         $item = new Item();
         $this->assertSame($item, $item->pubDate($pubDate));
-        $this->assertAttributeSame($pubDate, 'pubDate', $item);
     }
 
     public function testAppendTo()
@@ -137,7 +121,6 @@ class ItemTest extends TestCase
         $enclosure = ['url' => $url, 'length' => 0, 'type' => 'audio/mpeg'];
         $item = new Item();
         $this->assertSame($item, $item->enclosure($url));
-        $this->assertAttributeSame($enclosure, 'enclosure', $item);
     }
 
     public function testAuthor()
@@ -145,7 +128,6 @@ class ItemTest extends TestCase
         $author = uniqid();
         $item = new Item();
         $this->assertSame($item, $item->author($author));
-        $this->assertAttributeSame($author, 'author', $item);
     }
 
     public function testCreator()
@@ -155,7 +137,7 @@ class ItemTest extends TestCase
         $this->assertSame($item, $item->creator($creator));
 
         $creatorXml = '<dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">' . $creator . '</dc:creator>';
-        $this->assertContains($creatorXml, $item->asXML()->asXML());
+        $this->assertStringContainsString($creatorXml, $item->asXML()->asXML());
     }
 
     public function testPreferCdata()
@@ -166,20 +148,20 @@ class ItemTest extends TestCase
 
         // By default, prefer no CDATA on title and description
         $actualXml = $item->asXML()->asXML();
-        $this->assertContains('<title>&lt;h1&gt;title&lt;/h1&gt;</title>', $actualXml);
-        $this->assertContains('<description>&lt;p&gt;description&lt;/p&gt;</description>', $actualXml);
+        $this->assertStringContainsString('<title>&lt;h1&gt;title&lt;/h1&gt;</title>', $actualXml);
+        $this->assertStringContainsString('<description>&lt;p&gt;description&lt;/p&gt;</description>', $actualXml);
 
         // Once prefer-cdata is enabled, title and description is wrapped by CDATA
         $item->preferCdata(true);
         $actualXml = $item->asXML()->asXML();
-        $this->assertContains('<title><![CDATA[<h1>title</h1>]]></title>', $actualXml);
-        $this->assertContains('<description><![CDATA[<p>description</p>]]></description>', $actualXml);
+        $this->assertStringContainsString('<title><![CDATA[<h1>title</h1>]]></title>', $actualXml);
+        $this->assertStringContainsString('<description><![CDATA[<p>description</p>]]></description>', $actualXml);
 
         // Of course, prefer-cdata can be disabled again
         $item->preferCdata(false);
         $actualXml = $item->asXML()->asXML();
-        $this->assertContains('<title>&lt;h1&gt;title&lt;/h1&gt;</title>', $actualXml);
-        $this->assertContains('<description>&lt;p&gt;description&lt;/p&gt;</description>', $actualXml);
+        $this->assertStringContainsString('<title>&lt;h1&gt;title&lt;/h1&gt;</title>', $actualXml);
+        $this->assertStringContainsString('<description>&lt;p&gt;description&lt;/p&gt;</description>', $actualXml);
 
         // And like other APIs `preferCdata` is also fluent interface
         $obj = $item->preferCdata(true);

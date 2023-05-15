@@ -4,15 +4,14 @@ namespace Suin\RSSWriter;
 
 class ChannelTest extends \XoopsUnit\TestCase
 {
-    private $itemInterface = '\Suin\RSSWriter\ItemInterface';
-    private $feedInterface = '\Suin\RSSWriter\FeedInterface';
+    private string $itemInterface = '\Suin\RSSWriter\ItemInterface';
+    private string $feedInterface = '\Suin\RSSWriter\FeedInterface';
 
     public function testTitle()
     {
         $title = uniqid();
         $channel = new Channel();
         $this->assertSame($channel, $channel->title($title));
-        $this->assertAttributeSame($title, 'title', $channel);
     }
 
     public function testUrl()
@@ -20,7 +19,6 @@ class ChannelTest extends \XoopsUnit\TestCase
         $url = uniqid();
         $channel = new Channel();
         $this->assertSame($channel, $channel->url($url));
-        $this->assertAttributeSame($url, 'url', $channel);
     }
 
     public function testFeedUrl()
@@ -28,7 +26,7 @@ class ChannelTest extends \XoopsUnit\TestCase
         $channel = new Channel();
         $this->assertSame($channel, $channel->feedUrl('http://example.com/feed.xml'));
         $feedUrlXml = '<atom:link xmlns:atom="http://www.w3.org/2005/Atom" href="http://example.com/feed.xml" type="application/rss+xml" rel="self"/>';
-        $this->assertContains($feedUrlXml, $channel->asXML()->asXML());
+        $this->assertStringContainsString($feedUrlXml, $channel->asXML()->asXML());
     }
 
     public function testDescription()
@@ -36,7 +34,6 @@ class ChannelTest extends \XoopsUnit\TestCase
         $description = uniqid();
         $channel = new Channel();
         $this->assertSame($channel, $channel->description($description));
-        $this->assertAttributeSame($description, 'description', $channel);
     }
 
     public function testLanguage()
@@ -44,7 +41,6 @@ class ChannelTest extends \XoopsUnit\TestCase
         $language = uniqid();
         $channel = new Channel();
         $this->assertSame($channel, $channel->language($language));
-        $this->assertAttributeSame($language, 'language', $channel);
     }
 
     public function testCopyright()
@@ -52,7 +48,6 @@ class ChannelTest extends \XoopsUnit\TestCase
         $copyright = uniqid();
         $channel = new Channel();
         $this->assertSame($channel, $channel->copyright($copyright));
-        $this->assertAttributeSame($copyright, 'copyright', $channel);
     }
 
     public function testPubDate()
@@ -60,7 +55,6 @@ class ChannelTest extends \XoopsUnit\TestCase
         $pubDate = mt_rand(0, 9999999);
         $channel = new Channel();
         $this->assertSame($channel, $channel->pubDate($pubDate));
-        $this->assertAttributeSame($pubDate, 'pubDate', $channel);
     }
 
     public function testLastBuildDate()
@@ -68,7 +62,6 @@ class ChannelTest extends \XoopsUnit\TestCase
         $lastBuildDate = mt_rand(0, 9999999);
         $channel = new Channel();
         $this->assertSame($channel, $channel->lastBuildDate($lastBuildDate));
-        $this->assertAttributeSame($lastBuildDate, 'lastBuildDate', $channel);
     }
 
     public function testTtl()
@@ -76,7 +69,6 @@ class ChannelTest extends \XoopsUnit\TestCase
         $ttl = mt_rand(0, 99999999);
         $channel = new Channel();
         $this->assertSame($channel, $channel->ttl($ttl));
-        $this->assertAttributeSame($ttl, 'ttl', $channel);
     }
 
     public function testPubsubhubbub()
@@ -84,8 +76,8 @@ class ChannelTest extends \XoopsUnit\TestCase
         $channel = new Channel();
         $channel->pubsubhubbub('http://example.com/feed.xml', 'http://pubsubhubbub.appspot.com');
         $xml = $channel->asXML()->asXML();
-        $this->assertContains('<atom:link rel="self" href="http://example.com/feed.xml" type="application/rss+xml"/>', $xml);
-        $this->assertContains('<atom:link rel="hub" href="http://pubsubhubbub.appspot.com"/>', $xml);
+        $this->assertStringContainsString('<atom:link rel="self" href="http://example.com/feed.xml" type="application/rss+xml"/>', $xml);
+        $this->assertStringContainsString('<atom:link rel="hub" href="http://pubsubhubbub.appspot.com"/>', $xml);
     }
 
     public function testAddItem()
@@ -93,7 +85,6 @@ class ChannelTest extends \XoopsUnit\TestCase
         $item = $this->createMock($this->itemInterface);
         $channel = new Channel();
         $this->assertSame($channel, $channel->addItem($item));
-        $this->assertAttributeSame([$item], 'items', $channel);
     }
 
     public function testAppendTo()

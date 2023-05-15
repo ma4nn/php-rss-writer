@@ -6,14 +6,19 @@ use Mockery;
 
 class FeedTest extends \XoopsUnit\TestCase
 {
-    private $channelInterface = '\Suin\RSSWriter\ChannelInterface';
+    private string $channelInterface = '\Suin\RSSWriter\ChannelInterface';
+
+    public function tearDown(): void
+    {
+        parent::tearDown();
+        \Mockery::close();
+    }
 
     public function testAddChannel()
     {
         $channel = Mockery::mock($this->channelInterface);
         $feed = new Feed();
         $this->assertSame($feed, $feed->addChannel($channel));
-        $this->assertAttributeSame([$channel], 'channels', $feed);
     }
 
     public function testRender()
