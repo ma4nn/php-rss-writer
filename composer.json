@@ -1,7 +1,7 @@
 {
   "name": "suin/php-rss-writer",
   "type": "library",
-  "description": "Yet another simple RSS writer library for PHP 5.4 or later.",
+  "description": "Yet another simple RSS writer library.",
   "keywords": [
     "rss",
     "generator",
@@ -18,11 +18,11 @@
     }
   ],
   "require": {
-    "php": ">=5.4.0"
+    "php": "^7.4 || ^8.0"
   },
   "require-dev": {
-    "phpunit/phpunit": ">=4.8.36 <6.0",
-    "mockery/mockery": ">=0.9 <1.0",
+    "phpunit/phpunit": "^8",
+    "mockery/mockery": "^1.5",
     "suin/xoopsunit": ">=1.2"
   },
   "autoload": {

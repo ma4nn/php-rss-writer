@@ -8,6 +8,11 @@ class FeedTest extends \XoopsUnit\TestCase
 {
     private $channelInterface = '\Suin\RSSWriter\ChannelInterface';
 
+    public function tearDown(): void
+    {
+        \Mockery::close();
+    }
+
     public function testAddChannel()
     {
         $channel = Mockery::mock($this->channelInterface);

@@ -137,7 +137,7 @@ If you want to know APIs, please see [`FeedInterface`](src/Suin/RSSWriter/FeedIn
 $ vendor/bin/phpunit
 ```
 
-## Test through PHP 5.4 ~ PHP 7.0
+## Test through PHP 7.4
 
 ```console
 $ docker-compose up
