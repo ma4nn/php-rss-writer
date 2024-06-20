@@ -1,12 +1,13 @@
 <?php
+declare(strict_types=1);
 
 namespace Suin\RSSWriter;
 
-use XoopsUnit\TestCase;
+use PHPUnit\Framework\TestCase;
 
 class ItemTest extends TestCase
 {
-    private $channelInterface = '\Suin\RSSWriter\ChannelInterface';
+    private $channelInterface = \Suin\RSSWriter\ChannelInterface::class;
 
     public function testTitle()
     {
@@ -192,11 +193,7 @@ class ItemTest extends TestCase
             'author'      => 'John Smith'
         ];
 
-        $item = new Item();
-
-        foreach ($data as $key => $value) {
-            $this->reveal($item)->attr($key, $value);
-        }
+        $item = new Item(...$data);
 
         $expect = "
         <item>
@@ -238,11 +235,7 @@ class ItemTest extends TestCase
             'author'      => 'John Smith'
         ];
 
-        $item = new Item();
-
-        foreach ($data as $key => $value) {
-            $this->reveal($item)->attr($key, $value);
-        }
+        $item = new Item(...$data);
 
         $expect = "
         <item>
@@ -268,11 +261,7 @@ class ItemTest extends TestCase
             'description' => "Some of the most heated chatter at the Venice Film Festival this week was about the way that the arrival of the stars at the Palazzo del Cinema was being staged.",
         ];
 
-        $item = new Item();
-
-        foreach ($data as $key => $value) {
-            $this->reveal($item)->attr($key, $value);
-        }
+        $item = new Item(...$data);
 
         $expect = "
         <item>

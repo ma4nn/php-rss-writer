@@ -1,29 +1,13 @@
 <?php
+declare(strict_types=1);
 
 namespace Suin\RSSWriter;
 
-/**
- * Interface FeedInterface
- * @package Suin\RSSWriter
- */
 interface FeedInterface
 {
-    /**
-     * Add channel
-     * @param ChannelInterface $channel
-     * @return $thisJ
-     */
-    public function addChannel(ChannelInterface $channel);
+    public function addChannel(ChannelInterface $channel): self;
 
-    /**
-     * Render XML
-     * @return string
-     */
-    public function render();
+    public function render(): string;
 
-    /**
-     * Render XML
-     * @return string
-     */
-    public function __toString();
+    public function __toString(): string;
 }

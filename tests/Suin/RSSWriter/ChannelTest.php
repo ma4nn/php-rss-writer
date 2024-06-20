@@ -1,11 +1,15 @@
 <?php
+declare(strict_types=1);
 
 namespace Suin\RSSWriter;
 
-class ChannelTest extends \XoopsUnit\TestCase
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\TestCase;
+
+class ChannelTest extends TestCase
 {
-    private string $itemInterface = '\Suin\RSSWriter\ItemInterface';
-    private string $feedInterface = '\Suin\RSSWriter\FeedInterface';
+    private string $itemInterface = \Suin\RSSWriter\ItemInterface::class;
+    private string $feedInterface = \Suin\RSSWriter\FeedInterface::class;
 
     public function testTitle()
     {
@@ -95,19 +99,10 @@ class ChannelTest extends \XoopsUnit\TestCase
         $this->assertSame($channel, $channel->appendTo($feed));
     }
 
-    /**
-     * @param       $expect
-     * @param array $data
-     * @dataProvider dataForAsXML
-     */
+    #[DataProvider('dataForAsXML')]
     public function testAsXML($expect, array $data)
     {
-        $data = (object)$data;
-        $channel = new Channel();
-
-        foreach ($data as $key => $value) {
-            $this->reveal($channel)->attr($key, $value);
-        }
+        $channel = new Channel(...$data);
 
         $this->assertXmlStringEqualsXmlString($expect, $channel->asXML()->asXML());
     }
@@ -223,18 +218,24 @@ class ChannelTest extends \XoopsUnit\TestCase
         $xml2 = new SimpleXMLElement('<?xml version="1.0" encoding="UTF-8" ?><item><title>item2</title></item>');
         $xml3 = new SimpleXMLElement('<?xml version="1.0" encoding="UTF-8" ?><item><title>item3</title></item>');
 
+        /** @var \Suin\RSSWriter\ItemInterface&\PHPUnit\Framework\MockObject\MockObject $item1 */
         $item1 = $this->createMock($this->itemInterface);
-        $item1->expects($this->once())->method('asXML')->will($this->returnValue($xml1));
-        $item2 = $this->createMock($this->itemInterface);
-        $item2->expects($this->once())->method('asXML')->will($this->returnValue($xml2));
-        $item3 = $this->createMock($this->itemInterface);
-        $item3->expects($this->once())->method('asXML')->will($this->returnValue($xml3));
+        $item1->expects($this->once())->method('asXML')->willReturn($xml1);
 
-        $this->reveal($channel)
-            ->attr('title', "GoUpstate.com News Headlines")
-            ->attr('url', 'http://www.goupstate.com/')
-            ->attr('description', "The latest news from GoUpstate.com, a Spartanburg Herald-Journal Web site.")
-            ->attr('items', [$item1, $item2, $item3]);
+        /** @var \Suin\RSSWriter\ItemInterface&\PHPUnit\Framework\MockObject\MockObject $item2 */
+        $item2 = $this->createMock($this->itemInterface);
+        $item2->expects($this->once())->method('asXML')->willReturn($xml2);
+
+        /** @var \Suin\RSSWriter\ItemInterface&\PHPUnit\Framework\MockObject\MockObject $item3 */
+        $item3 = $this->createMock($this->itemInterface);
+        $item3->expects($this->once())->method('asXML')->willReturn($xml3);
+
+        $channel->title("GoUpstate.com News Headlines")
+            ->url('http://www.goupstate.com/')
+            ->description("The latest news from GoUpstate.com, a Spartanburg Herald-Journal Web site.")
+            ->addItem($item1)
+            ->addItem($item2)
+            ->addItem($item3);
 
         $expect = '<?xml version="1.0" encoding="UTF-8" ?>
             <channel>

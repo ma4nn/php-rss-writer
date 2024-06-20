@@ -1,52 +1,29 @@
 <?php
+declare(strict_types=1);
 
 namespace Suin\RSSWriter;
 
-/**
- * Class Channel
- * @package Suin\RSSWriter
- */
 class Channel implements ChannelInterface
 {
-    /** @var string */
-    protected $title;
+    public function __construct(
+        protected string|null $title = null,
+        protected string|null $url = null,
+        protected string|null $feedUrl = null,
+        protected string|null $description = null,
+        protected string|null $language = null,
+        protected string|null $copyright = null,
+        protected int|null $pubDate = null,
+        protected int|null $lastBuildDate = null,
+        protected int|null $ttl = null,
 
-    /** @var string */
-    protected $url;
+        /** @var string[] */
+        protected array|null $pubsubhubbub = null,
 
-    /** @var string */
-    protected $feedUrl;
+        /** @var ItemInterface[] */
+        protected array $items = []
+    ) {}
 
-    /** @var string */
-    protected $description;
-
-    /** @var string */
-    protected $language;
-
-    /** @var string */
-    protected $copyright;
-
-    /** @var int */
-    protected $pubDate;
-
-    /** @var int */
-    protected $lastBuildDate;
-
-    /** @var int */
-    protected $ttl;
-
-    /** @var string[] */
-    protected $pubsubhubbub;
-
-    /** @var ItemInterface[] */
-    protected $items = [];
-
-    /**
-     * Set channel title
-     * @param string $title
-     * @return $this
-     */
-    public function title($title)
+    public function title(string $title): self
     {
         $this->title = $title;
         return $this;
@@ -57,79 +34,44 @@ class Channel implements ChannelInterface
      * @param string $url
      * @return $this
      */
-    public function url($url)
+    public function url(string $url): self
     {
         $this->url = $url;
         return $this;
     }
 
-    /**
-     * Set URL of this feed
-     * @param string $url
-     * @return $this;
-     */
-    public function feedUrl($url)
+    public function feedUrl(string $url): self
     {
         $this->feedUrl = $url;
         return $this;
     }
 
-    /**
-     * Set channel description
-     * @param string $description
-     * @return $this
-     */
-    public function description($description)
+    public function description(string $description): self
     {
         $this->description = $description;
         return $this;
     }
 
-    /**
-     * Set ISO639 language code
-     *
-     * The language the channel is written in. This allows aggregators to group all
-     * Italian language sites, for example, on a single page. A list of allowable
-     * values for this element, as provided by Netscape, is here. You may also use
-     * values defined by the W3C.
-     *
-     * @param string $language
-     * @return $this
-     */
-    public function language($language)
+    /** @inheritDoc */
+    public function language(string $language): self
     {
         $this->language = $language;
         return $this;
     }
 
-    /**
-     * Set channel copyright
-     * @param string $copyright
-     * @return $this
-     */
-    public function copyright($copyright)
+    public function copyright(string $copyright): self
     {
         $this->copyright = $copyright;
         return $this;
     }
 
-    /**
-     * Set channel published date
-     * @param int $pubDate Unix timestamp
-     * @return $this
-     */
-    public function pubDate($pubDate)
+    public function pubDate(int $pubDate): self
     {
         $this->pubDate = $pubDate;
         return $this;
     }
 
-    /**
-     * Set channel last build date
-     * @param int $lastBuildDate Unix timestamp
-     * @return $this
-     */
-    public function lastBuildDate($lastBuildDate)
+    public function lastBuildDate(int $lastBuildDate): self
     {
         $this->lastBuildDate = $lastBuildDate;
         return $this;
@@ -140,19 +82,13 @@ class Channel implements ChannelInterface
      * @param int $ttl
      * @return $this
      */
-    public function ttl($ttl)
+    public function ttl(int $ttl): self
     {
         $this->ttl = $ttl;
         return $this;
     }
 
-    /**
-     * Enable PubSubHubbub discovery
-     * @param string $feedUrl
-     * @param string $hubUrl
-     * @return $this
-     */
-    public function pubsubhubbub($feedUrl, $hubUrl)
+    public function pubsubhubbub(string $feedUrl, string $hubUrl): self
     {
         $this->pubsubhubbub = [
             'feedUrl' => $feedUrl,
@@ -161,35 +97,20 @@ class Channel implements ChannelInterface
         return $this;
     }
 
-    /**
-     * Add item object
-     * @param ItemInterface $item
-     * @return $this
-     */
-    public function addItem(ItemInterface $item)
+    public function addItem(ItemInterface $item): self
     {
         $this->items[] = $item;
         return $this;
     }
 
-    /**
-     * Append to feed
-     * @param FeedInterface $feed
-     * @return $this
-     */
-    public function appendTo(FeedInterface $feed)
+    public function appendTo(FeedInterface $feed): self
     {
         $feed->addChannel($this);
         return $this;
     }
 
-    /**
-     * Return XML object
-     *
-     * @return SimpleXMLElement
-     * @throws \Exception
-     */
-    public function asXML()
+    /** @throws \Exception */
+    public function asXML(): SimpleXMLElement
     {
         $xml = new SimpleXMLElement('<?xml version="1.0" encoding="UTF-8" ?><channel></channel>', LIBXML_NOERROR | LIBXML_ERR_NONE | LIBXML_ERR_FATAL);
         $xml->addChild('title', $this->title);
@@ -220,7 +141,7 @@ class Channel implements ChannelInterface
         }
 
         if ($this->ttl !== null) {
-            $xml->addChild('ttl', $this->ttl);
+            $xml->addChild('ttl', (string)$this->ttl);
         }
 
         if ($this->pubsubhubbub !== null) {

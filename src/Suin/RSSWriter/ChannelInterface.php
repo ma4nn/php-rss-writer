@@ -1,33 +1,13 @@
 <?php
+declare(strict_types=1);
 
 namespace Suin\RSSWriter;
 
-/**
- * Interface ChannelInterface
- * @package Suin\RSSWriter
- */
 interface ChannelInterface
 {
-    /**
-     * Set channel title
-     * @param string $title
-     * @return $this
-     */
-    public function title($title);
-
-    /**
-     * Set channel URL
-     * @param string $url
-     * @return $this
-     */
-    public function url($url);
-
-    /**
-     * Set channel description
-     * @param string $description
-     * @return $this
-     */
-    public function description($description);
+    public function title(string $title): self;
+    public function url(string $url): self;
+    public function description(string $description): self;
 
     /**
      * Set ISO639 language code
@@ -40,53 +20,13 @@ interface ChannelInterface
      * @param string $language
      * @return $this
      */
-    public function language($language);
+    public function language(string $language): self;
 
-    /**
-     * Set channel copyright
-     * @param string $copyright
-     * @return $this
-     */
-    public function copyright($copyright);
-
-    /**
-     * Set channel published date
-     * @param int $pubDate Unix timestamp
-     * @return $this
-     */
-    public function pubDate($pubDate);
-
-    /**
-     * Set channel last build date
-     * @param int $lastBuildDate Unix timestamp
-     * @return $this
-     */
-    public function lastBuildDate($lastBuildDate);
-
-    /**
-     * Set channel ttl (minutes)
-     * @param int $ttl
-     * @return $this
-     */
-    public function ttl($ttl);
-
-    /**
-     * Add item object
-     * @param ItemInterface $item
-     * @return $this
-     */
-    public function addItem(ItemInterface $item);
-
-    /**
-     * Append to feed
-     * @param FeedInterface $feed
-     * @return $this
-     */
-    public function appendTo(FeedInterface $feed);
-
-    /**
-     * Return XML object
-     * @return SimpleXMLElement
-     */
-    public function asXML();
+    public function copyright(string $copyright): self;
+    public function pubDate(int $pubDate): self;
+    public function lastBuildDate(int $lastBuildDate): self;
+    public function ttl(int $ttl): self;
+    public function addItem(ItemInterface $item): self;
+    public function appendTo(FeedInterface $feed): self;
+    public function asXML(): SimpleXMLElement;
 }

@@ -1,73 +1,58 @@
 <?php
+declare(strict_types=1);
 
 namespace Suin\RSSWriter;
 
-/**
- * Class Item
- * @package Suin\RSSWriter
- */
 class Item implements ItemInterface
 {
-    /** @var string */
-    protected $title;
+    public function __construct(
+        protected string|null $title = null,
+        protected string|null $url = null,
+        protected string|null $description = null,
+        protected string|null $contentEncoded = null,
 
-    /** @var string */
-    protected $url;
+        /** @var list<string> */
+        protected array $categories = [],
 
-    /** @var string */
-    protected $description;
+        protected string|null $guid = null,
+        protected bool $isPermalink = false,
+        protected int|null $pubDate = null,
 
-    /** @var string */
-    protected $contentEncoded;
+        /** @var list<string> */
+        protected array $enclosure = [],
 
-    /** @var array */
-    protected $categories = [];
+        protected string|null $author = null,
+        protected string|null $creator = null,
+        protected bool $preferCdata = false
+    )
+    {
+    }
 
-    /** @var string */
-    protected $guid;
-
-    /** @var bool */
-    protected $isPermalink;
-
-    /** @var int */
-    protected $pubDate;
-
-    /** @var array */
-    protected $enclosure;
-
-    /** @var string */
-    protected $author;
-
-    /** @var string */
-    protected $creator;
-
-    protected $preferCdata = false;
-
-    public function title($title)
+    public function title(string $title): self
     {
         $this->title = $title;
         return $this;
     }
 
-    public function url($url)
+    public function url(string $url): self
     {
         $this->url = $url;
         return $this;
     }
 
-    public function description($description)
+    public function description(string $description): self
     {
         $this->description = $description;
         return $this;
     }
 
-    public function contentEncoded($content)
+    public function contentEncoded(string $content): self
     {
         $this->contentEncoded = $content;
         return $this;
     }
 
-    public function category($name, $domain = null)
+    public function category(string $name, string|null $domain = null): self
     {
         $this->categories[] = [$name, $domain];
         return $this;
@@ -86,50 +71,50 @@ class Item implements ItemInterface
         return $this;
     }
 
-    public function guid($guid, $isPermalink = false)
+    public function guid(string $guid, bool $isPermalink = false): self
     {
         $this->guid = $guid;
         $this->isPermalink = $isPermalink;
         return $this;
     }
 
-    public function pubDate($pubDate)
+    public function pubDate(int $pubDate): self
     {
         $this->pubDate = $pubDate;
         return $this;
     }
 
-    public function enclosure($url, $length = 0, $type = 'audio/mpeg')
+    public function enclosure(string $url, int $length = 0, string $type = 'audio/mpeg'): self
     {
         $this->enclosure = ['url' => $url, 'length' => $length, 'type' => $type];
         return $this;
     }
 
-    public function author($author)
+    public function author(string $author): self
     {
         $this->author = $author;
         return $this;
     }
 
-    public function creator($creator)
+    public function creator(string $creator): self
     {
         $this->creator = $creator;
         return $this;
     }
 
-    public function preferCdata($preferCdata)
+    public function preferCdata(bool $preferCdata): self
     {
-        $this->preferCdata = (bool)$preferCdata;
+        $this->preferCdata = $preferCdata;
         return $this;
     }
 
-    public function appendTo(ChannelInterface $channel)
+    public function appendTo(ChannelInterface $channel): self
     {
         $channel->addItem($this);
         return $this;
     }
 
-    public function asXML()
+    public function asXML(): SimpleXMLElement
     {
         $xml = new SimpleXMLElement('<?xml version="1.0" encoding="UTF-8" ?><item></item>', LIBXML_NOERROR | LIBXML_ERR_NONE | LIBXML_ERR_FATAL);
 
@@ -184,7 +169,7 @@ class Item implements ItemInterface
             $element->addAttribute('type', $this->enclosure['type']);
 
             if ($this->enclosure['length']) {
-                $element->addAttribute('length', $this->enclosure['length']);
+                $element->addAttribute('length', (string)$this->enclosure['length']);
             }
         }
 

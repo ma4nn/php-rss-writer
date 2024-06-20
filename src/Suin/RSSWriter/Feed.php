@@ -1,34 +1,22 @@
 <?php
+declare(strict_types=1);
 
 namespace Suin\RSSWriter;
 
 use DOMDocument;
 
-/**
- * Class Feed
- * @package Suin\RSSWriter
- */
 class Feed implements FeedInterface
 {
     /** @var ChannelInterface[] */
-    protected $channels = [];
+    protected array $channels = [];
 
-    /**
-     * Add channel
-     * @param ChannelInterface $channel
-     * @return $this
-     */
-    public function addChannel(ChannelInterface $channel)
+    public function addChannel(ChannelInterface $channel): self
     {
         $this->channels[] = $channel;
         return $this;
     }
 
-    /**
-     * Render XML
-     * @return string
-     */
-    public function render()
+    public function render(): string
     {
         $xml = new SimpleXMLElement('<?xml version="1.0" encoding="UTF-8" ?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" />', LIBXML_NOERROR | LIBXML_ERR_NONE | LIBXML_ERR_FATAL);
 
@@ -44,11 +32,7 @@ class Feed implements FeedInterface
         return $dom->saveXML();
     }
 
-    /**
-     * Render XML
-     * @return string
-     */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->render();
     }
