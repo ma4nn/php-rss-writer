@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 class ItemTest extends TestCase
 {
-    private $channelInterface = \Suin\RSSWriter\ChannelInterface::class;
+    private string $channelInterface = \Suin\RSSWriter\ChannelInterface::class;
 
     public function testTitle()
     {

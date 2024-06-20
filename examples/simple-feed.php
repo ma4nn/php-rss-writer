@@ -1,14 +1,11 @@
 <?php
+declare(strict_types=1);
+
+require __DIR__ . '/../vendor/autoload.php';
 
 use Suin\RSSWriter\Channel;
 use Suin\RSSWriter\Feed;
 use Suin\RSSWriter\Item;
-
-// Load test target classes
-spl_autoload_register(function ($c) {
-    @include_once strtr($c, '\\_', '//') . '.php';
-});
-set_include_path(get_include_path() . PATH_SEPARATOR . dirname(__DIR__) . '/src');
 
 $feed = new Feed();
 

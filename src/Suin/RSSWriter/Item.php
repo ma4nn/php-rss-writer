@@ -63,7 +63,7 @@ class Item implements ItemInterface
         foreach ($categories as $cat) {
             $domain = null;
             if (is_array($cat) && !empty($cat)) {
-                $domain = isset($cat[1]) ? $cat[1] : null;
+                $domain = $cat[1] ?? null;
                 $cat = $cat[0];
             }
             $this->category($cat, $domain);
