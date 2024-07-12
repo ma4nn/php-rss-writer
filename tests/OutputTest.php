@@ -7,12 +7,14 @@ use PHPUnit\Framework\TestCase;
 use Suin\RSSWriter\Channel;
 use Suin\RSSWriter\Feed;
 use Suin\RSSWriter\Item;
+use Suin\RSSWriter\Validator;
 
 final class OutputTest extends TestCase
 {
     public function testSimpleFeed(): void
     {
         $feed = new Feed();
+        $validator = new Validator();
 
         $channel = new Channel();
         $channel
@@ -35,7 +37,8 @@ final class OutputTest extends TestCase
             ->description('<div>Blog body</div>')
             ->contentEncoded('<div>Blog body</div>')
             ->url('http://blog.example.com/2012/08/21/blog-entry/')
-            ->author('John Smith')
+            ->author('john@smith.com')
+            ->creator('John Smith')
             ->pubDate(strtotime('Tue, 21 Aug 2012 19:50:37 +0900'))
             ->guid('http://blog.example.com/2012/08/21/blog-entry/', true)
             ->preferCdata(true) // By this, title and description become CDATA wrapped HTML.
@@ -50,6 +53,13 @@ final class OutputTest extends TestCase
             ->enclosure('http://podcast.example.com/2012/08/21/podcast.mp3', 4889, 'audio/mpeg')
             ->appendTo($channel);
 
-        $this->assertXmlStringEqualsXmlFile(__DIR__ . '/simple-feed.xml', $feed->render());
+        $feed = $feed->render();
+
+        $this->assertXmlStringEqualsXmlFile(__DIR__ . '/simple-feed.xml', $feed);
+
+        $isValid = $validator->validate($feed);
+        var_dump($validator->getLastErrors());
+        $this->assertEmpty($validator->getLastErrors());
+        $this->assertTrue($isValid);
     }
 }

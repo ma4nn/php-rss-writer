@@ -3,3 +3,4 @@
 /composer.lock
 /tests/cover
 .phpunit.cache
+.phpunit.result.cache

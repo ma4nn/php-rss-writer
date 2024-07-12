@@ -14,28 +14,28 @@ final class ItemTest extends TestCase
     private string $channelInterface = \Suin\RSSWriter\ChannelInterface::class;
     private static int $now = 1720769525;
 
-    public function testTitle()
+    public function testTitle(): void
     {
         $title = uniqid();
         $item = new Item();
         $this->assertSame($item, $item->title($title));
     }
 
-    public function testUrl()
+    public function testUrl(): void
     {
         $url = uniqid();
         $item = new Item();
         $this->assertSame($item, $item->url($url));
     }
 
-    public function testDescription()
+    public function testDescription(): void
     {
         $description = uniqid();
         $item = new Item();
         $this->assertSame($item, $item->description($description));
     }
 
-    public function testContentEncoded()
+    public function testContentEncoded(): void
     {
         $item = new Item();
         $this->assertSame($item, $item->contentEncoded('<div>contents</div>'));
@@ -57,25 +57,28 @@ final class ItemTest extends TestCase
             </item>
           </channel>
         </rss>';
+
         $this->assertXmlStringEqualsXmlString($expected, $feed->render());
     }
 
-    public function testCategory()
+    public function testCategory(): void
     {
         $category = uniqid();
         $item = new Item();
+
         $this->assertSame($item, $item->category($category));
     }
 
-    public function testCategory_with_domain()
+    public function testCategory_with_domain(): void
     {
         $category = uniqid();
         $domain = uniqid();
         $item = new Item();
+
         $this->assertSame($item, $item->category($category, $domain));
     }
 
-    public function testCategories()
+    public function testCategories(): void
     {
         $categories = ['a', 'b', ['c', 'domain'], 'd', ['e']];
         $stored_categories = [
@@ -89,14 +92,14 @@ final class ItemTest extends TestCase
         $item->categories($categories);
     }
 
-    public function testGuid()
+    public function testGuid(): void
     {
         $guid = uniqid();
         $item = new Item();
         $this->assertSame($item, $item->guid($guid));
     }
 
-    public function testGuid_with_permalink()
+    public function testGuid_with_permalink(): void
     {
         $item = new Item();
         $item->guid('guid', true);
@@ -106,47 +109,50 @@ final class ItemTest extends TestCase
         $item->guid('guid'); // default
     }
 
-    public function testPubDate()
+    public function testPubDate(): void
     {
         $pubDate = mt_rand(1000000, 9999999);
         $item = new Item();
         $this->assertSame($item, $item->pubDate($pubDate));
     }
 
-    public function testAppendTo()
+    public function testAppendTo(): void
     {
         $item = new Item();
         $channel = $this->createMock($this->channelInterface);
         $channel->expects($this->once())->method('addItem')->with($item);
+
         $this->assertSame($item, $item->appendTo($channel));
     }
 
-    public function testEnclosure()
+    public function testEnclosure(): void
     {
         $url = uniqid();
-        $enclosure = ['url' => $url, 'length' => 0, 'type' => 'audio/mpeg'];
         $item = new Item();
+
         $this->assertSame($item, $item->enclosure($url));
     }
 
-    public function testAuthor()
+    public function testAuthor(): void
     {
         $author = uniqid();
         $item = new Item();
+
         $this->assertSame($item, $item->author($author));
     }
 
-    public function testCreator()
+    public function testCreator(): void
     {
         $creator = uniqid();
         $item = new Item();
         $this->assertSame($item, $item->creator($creator));
 
         $creatorXml = '<dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">' . $creator . '</dc:creator>';
-        $this->assertStringContainsString($creatorXml, $item->asXML()->asXML());
+
+        $this->assertStringContainsString($creatorXml, (string)$item->asXML()->asXML());
     }
 
-    public function testPreferCdata()
+    public function testPreferCdata(): void
     {
         $item = new Item();
         $item->title('<h1>title</h1>');
@@ -196,10 +202,10 @@ final class ItemTest extends TestCase
         </item>
         ";
 
-        $this->assertXmlStringEqualsXmlString($expect, $item->asXML()->asXML());
+        $this->assertXmlStringEqualsXmlString($expect, (string)$item->asXML()->asXML());
     }
 
-    public function testAsXML_false_permalink()
+    public function testAsXML_false_permalink(): void
     {
         $now = time();
         $nowString = date(DATE_RSS, $now);
@@ -238,10 +244,11 @@ final class ItemTest extends TestCase
             <author>{$data['author']}</author>
         </item>
         ";
-        $this->assertXmlStringEqualsXmlString($expect, $item->asXML()->asXML());
+
+        $this->assertXmlStringEqualsXmlString($expect, (string)$item->asXML()->asXML());
     }
 
-    public function testAsXML_test_Japanese()
+    public function testAsXML_test_Japanese(): void
     {
         $data = [
             'title'       => "Venice Film Festival",
@@ -259,10 +266,10 @@ final class ItemTest extends TestCase
         </item>
         ";
 
-        $this->assertXmlStringEqualsXmlString($expect, $item->asXML()->asXML());
+        $this->assertXmlStringEqualsXmlString($expect, (string)$item->asXML()->asXML());
     }
 
-    public function test_with_amp()
+    public function test_with_amp(): void
     {
         $item = new Item();
         $item
@@ -276,7 +283,7 @@ final class ItemTest extends TestCase
         $this->assertSame($expect, $item->asXML()->asXML());
     }
 
-    public function test_fail_safe_against_invalid_string()
+    public function test_fail_safe_against_invalid_string(): void
     {
         $item = new Item();
         $item

@@ -11,14 +11,14 @@ final class FeedTest extends TestCase
 {
     private string $channelInterface = \Suin\RSSWriter\ChannelInterface::class;
 
-    public function testAddChannel()
+    public function testAddChannel(): void
     {
         $channel = $this->createMock($this->channelInterface);
         $feed = new Feed();
         $this->assertSame($feed, $feed->addChannel($channel));
     }
 
-    public function testRender()
+    public function testRender(): void
     {
         $feed = new Feed();
         $xml1 = new SimpleXMLElement('<?xml version="1.0" encoding="UTF-8" ?><channel><title>channel1</title></channel>');
@@ -46,10 +46,11 @@ final class FeedTest extends TestCase
                 <channel><title>channel3</title></channel>
             </rss>
         ';
+
         $this->assertXmlStringEqualsXmlString($expect, $feed->render());
     }
 
-    public function testRender_with_japanese()
+    public function testRender_with_japanese(): void
     {
         $feed = new Feed();
         $xml1 = new SimpleXMLElement('<?xml version="1.0" encoding="UTF-8" ?><channel><title>日本語1</title></channel>');
@@ -90,7 +91,7 @@ XML;
 
     }
 
-    public function test__toString()
+    public function test__toString(): void
     {
         $feed = new Feed();
         $xml1 = new SimpleXMLElement('<?xml version="1.0" encoding="UTF-8" ?><channel><title>channel1</title></channel>');

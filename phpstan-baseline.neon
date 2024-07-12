@@ -16,11 +16,6 @@ parameters:
 			path: src/Feed.php
 
 		-
-			message: "#^Method Suin\\\\RSSWriter\\\\Feed\\:\\:render\\(\\) should return string but returns string\\|false\\.$#"
-			count: 1
-			path: src/Feed.php
-
-		-
 			message: "#^Cannot call method addAttribute\\(\\) on Suin\\\\RSSWriter\\\\SimpleXMLElement\\|null\\.$#"
 			count: 5
 			path: src/Item.php
@@ -191,26 +186,6 @@ parameters:
 			path: tests/ChannelTest.php
 
 		-
-			message: "#^Method Suin\\\\RSSWriter\\\\Test\\\\FeedTest\\:\\:testAddChannel\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/FeedTest.php
-
-		-
-			message: "#^Method Suin\\\\RSSWriter\\\\Test\\\\FeedTest\\:\\:testRender\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/FeedTest.php
-
-		-
-			message: "#^Method Suin\\\\RSSWriter\\\\Test\\\\FeedTest\\:\\:testRender_with_japanese\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/FeedTest.php
-
-		-
-			message: "#^Method Suin\\\\RSSWriter\\\\Test\\\\FeedTest\\:\\:test__toString\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/FeedTest.php
-
-		-
 			message: "#^Parameter \\#1 \\$channel of method Suin\\\\RSSWriter\\\\Feed\\:\\:addChannel\\(\\) expects Suin\\\\RSSWriter\\\\ChannelInterface, PHPUnit\\\\Framework\\\\MockObject\\\\MockObject given\\.$#"
 			count: 1
 			path: tests/FeedTest.php
@@ -226,101 +201,6 @@ parameters:
 			path: tests/FeedTest.php
 
 		-
-			message: "#^Method Suin\\\\RSSWriter\\\\Test\\\\ItemTest\\:\\:testAppendTo\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/ItemTest.php
-
-		-
-			message: "#^Method Suin\\\\RSSWriter\\\\Test\\\\ItemTest\\:\\:testAsXML_false_permalink\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/ItemTest.php
-
-		-
-			message: "#^Method Suin\\\\RSSWriter\\\\Test\\\\ItemTest\\:\\:testAsXML_test_Japanese\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/ItemTest.php
-
-		-
-			message: "#^Method Suin\\\\RSSWriter\\\\Test\\\\ItemTest\\:\\:testAuthor\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/ItemTest.php
-
-		-
-			message: "#^Method Suin\\\\RSSWriter\\\\Test\\\\ItemTest\\:\\:testCategories\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/ItemTest.php
-
-		-
-			message: "#^Method Suin\\\\RSSWriter\\\\Test\\\\ItemTest\\:\\:testCategory\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/ItemTest.php
-
-		-
-			message: "#^Method Suin\\\\RSSWriter\\\\Test\\\\ItemTest\\:\\:testCategory_with_domain\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/ItemTest.php
-
-		-
-			message: "#^Method Suin\\\\RSSWriter\\\\Test\\\\ItemTest\\:\\:testContentEncoded\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/ItemTest.php
-
-		-
-			message: "#^Method Suin\\\\RSSWriter\\\\Test\\\\ItemTest\\:\\:testCreator\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/ItemTest.php
-
-		-
-			message: "#^Method Suin\\\\RSSWriter\\\\Test\\\\ItemTest\\:\\:testDescription\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/ItemTest.php
-
-		-
-			message: "#^Method Suin\\\\RSSWriter\\\\Test\\\\ItemTest\\:\\:testEnclosure\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/ItemTest.php
-
-		-
-			message: "#^Method Suin\\\\RSSWriter\\\\Test\\\\ItemTest\\:\\:testGuid\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/ItemTest.php
-
-		-
-			message: "#^Method Suin\\\\RSSWriter\\\\Test\\\\ItemTest\\:\\:testGuid_with_permalink\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/ItemTest.php
-
-		-
-			message: "#^Method Suin\\\\RSSWriter\\\\Test\\\\ItemTest\\:\\:testPreferCdata\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/ItemTest.php
-
-		-
-			message: "#^Method Suin\\\\RSSWriter\\\\Test\\\\ItemTest\\:\\:testPubDate\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/ItemTest.php
-
-		-
-			message: "#^Method Suin\\\\RSSWriter\\\\Test\\\\ItemTest\\:\\:testTitle\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/ItemTest.php
-
-		-
-			message: "#^Method Suin\\\\RSSWriter\\\\Test\\\\ItemTest\\:\\:testUrl\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/ItemTest.php
-
-		-
-			message: "#^Method Suin\\\\RSSWriter\\\\Test\\\\ItemTest\\:\\:test_fail_safe_against_invalid_string\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/ItemTest.php
-
-		-
-			message: "#^Method Suin\\\\RSSWriter\\\\Test\\\\ItemTest\\:\\:test_with_amp\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/ItemTest.php
-
-		-
 			message: "#^Parameter \\#1 \\$channel of method Suin\\\\RSSWriter\\\\Item\\:\\:appendTo\\(\\) expects Suin\\\\RSSWriter\\\\ChannelInterface, PHPUnit\\\\Framework\\\\MockObject\\\\MockObject given\\.$#"
 			count: 1
 			path: tests/ItemTest.php
@@ -331,13 +211,8 @@ parameters:
 			path: tests/ItemTest.php
 
 		-
-			message: "#^Parameter \\#2 \\$actualXml of method PHPUnit\\\\Framework\\\\Assert\\:\\:assertXmlStringEqualsXmlString\\(\\) expects string, string\\|false given\\.$#"
-			count: 3
-			path: tests/ItemTest.php
-
-		-
 			message: "#^Parameter \\#2 \\$haystack of method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\) expects string, string\\|false given\\.$#"
-			count: 7
+			count: 6
 			path: tests/ItemTest.php
 
 		-

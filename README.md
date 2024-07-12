@@ -1,5 +1,7 @@
 # RSS Writer Library for PHP
 
+![build status](https://github.com/ma4nn/php-rss-writer/actions/workflows/ci.yml/badge.svg)
+
 `\Suin\RSSWriter` is yet another simple RSS writer library for PHP. This component is Licensed under MIT license.
 
 This library can also be used to publish Podcasts.
@@ -32,7 +34,8 @@ $item
     ->description('<div>Blog body</div>')
     ->contentEncoded('<div>Blog body</div>')
     ->url('http://blog.example.com/2012/08/21/blog-entry/')
-    ->author('John Smith')
+    ->author('john@smith.com')
+    ->creator('John Smith')
     ->pubDate(strtotime('Tue, 21 Aug 2012 19:50:37 +0900'))
     ->guid('http://blog.example.com/2012/08/21/blog-entry/', true)
     ->preferCdata(true) // By this, title and description become CDATA wrapped HTML.
@@ -73,7 +76,8 @@ Output:
       <content:encoded><![CDATA[<div>Blog body</div>]]></content:encoded>
       <guid>http://blog.example.com/2012/08/21/blog-entry/</guid>
       <pubDate>Tue, 21 Aug 2012 10:50:37 +0000</pubDate>
-      <author>John Smith</author>
+      <author>john@smith.com</author>
+      <creator>John Smith</creator>
     </item>
     <item>
       <title>Some Podcast Entry</title>
