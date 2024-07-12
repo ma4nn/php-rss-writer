@@ -1,10 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace Suin\RSSWriter;
+namespace Suin\RSSWriter\Test;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
+use Suin\RSSWriter\Channel;
+use Suin\RSSWriter\SimpleXMLElement;
 
 class ChannelTest extends TestCase
 {

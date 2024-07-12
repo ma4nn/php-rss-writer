@@ -1,9 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace Suin\RSSWriter;
+namespace Suin\RSSWriter\Test;
 
 use PHPUnit\Framework\TestCase;
+use Suin\RSSWriter\Channel;
+use Suin\RSSWriter\Feed;
+use Suin\RSSWriter\Item;
 
 class ItemTest extends TestCase
 {

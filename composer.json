@@ -30,11 +30,15 @@
     "ext-libxml": "*"
   },
   "require-dev": {
-    "phpunit/phpunit": "^11"
+    "phpunit/phpunit": "^11",
+    "phpstan/phpstan": "^1.11"
   },
   "autoload": {
     "psr-0": {
       "Suin\\RSSWriter": "src"
+    },
+    "psr-4": {
+      "Suin\\RSSWriter\\Test\\": "tests"
     }
   },
   "replace": {
