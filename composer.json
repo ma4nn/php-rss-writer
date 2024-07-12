@@ -34,10 +34,8 @@
     "phpstan/phpstan": "^1.11"
   },
   "autoload": {
-    "psr-0": {
-      "Suin\\RSSWriter": "src"
-    },
     "psr-4": {
+      "Suin\\RSSWriter\\": "src",
       "Suin\\RSSWriter\\Test\\": "tests"
     }
   },
