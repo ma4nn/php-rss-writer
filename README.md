@@ -4,7 +4,7 @@
 
 This library can also be used to publish Podcasts.
 
-This fork of [the original package](https://github.com/suin/php-rss-writer) mainly raises the PHP compatibility level to >= 8.1 and improves code quality.
+This fork of [the original package](https://github.com/suin/php-rss-writer) mainly raises the PHP compatibility level to >= 8.2 and improves code quality.
 
 ## Quick demo
 
