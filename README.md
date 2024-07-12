@@ -1,10 +1,10 @@
-# \Suin\RSSWriter
+# RSS Writer Library for PHP
 
 `\Suin\RSSWriter` is yet another simple RSS writer library for PHP. This component is Licensed under MIT license.
 
 This library can also be used to publish Podcasts.
 
-This fork of [the original package](https://github.com/suin/php-rss-writer) mainly raises the PHP compatibility level to >= 8.1.
+This fork of [the original package](https://github.com/suin/php-rss-writer) mainly raises the PHP compatibility level to >= 8.1 and improves code quality.
 
 ## Quick demo
 
