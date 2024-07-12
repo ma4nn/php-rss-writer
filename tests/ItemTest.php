@@ -3,14 +3,16 @@ declare(strict_types=1);
 
 namespace Suin\RSSWriter\Test;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Suin\RSSWriter\Channel;
 use Suin\RSSWriter\Feed;
 use Suin\RSSWriter\Item;
 
-class ItemTest extends TestCase
+final class ItemTest extends TestCase
 {
     private string $channelInterface = \Suin\RSSWriter\ChannelInterface::class;
+    private static int $now = 1720769525;
 
     public function testTitle()
     {
@@ -172,31 +174,13 @@ class ItemTest extends TestCase
         $this->assertSame($obj, $item);
     }
 
-    public function testAsXML()
+    /** @param array<string,mixed> $data */
+    #[DataProvider('provideXmlData')]
+    public function testAsXML(array $data): void
     {
-        $now = time();
-        $nowString = date(DATE_RSS, $now);
-
-        $data = [
-            'title'       => "Venice Film Festival Tries to Quit Sinking",
-            'url'         => 'http://nytimes.com/2004/12/07FEST.html',
-            'description' => "Some of the most heated chatter at the Venice Film Festival this week was about the way that the arrival of the stars at the Palazzo del Cinema was being staged.",
-            'categories'  => [
-                ["Grateful Dead", null],
-                ["MSFT", 'http://www.fool.com/cusips'],
-            ],
-            'guid'        => "http://inessential.com/2002/09/01.php#a2",
-            'isPermalink' => true,
-            'pubDate'     => $now,
-            'enclosure'   => [
-                'url'    => 'http://link-to-audio-file.com/test.mp3',
-                'length' => 4992,
-                'type'   => 'audio/mpeg'
-            ],
-            'author'      => 'John Smith'
-        ];
-
         $item = new Item(...$data);
+
+        $pubDate = date(DATE_RSS, self::$now);
 
         $expect = "
         <item>
@@ -206,11 +190,12 @@ class ItemTest extends TestCase
             <category>{$data['categories'][0][0]}</category>
             <category domain=\"{$data['categories'][1][1]}\">{$data['categories'][1][0]}</category>
             <guid>{$data['guid']}</guid>
-            <pubDate>{$nowString}</pubDate>
+            <pubDate>{$pubDate}</pubDate>
             <enclosure url=\"{$data['enclosure']['url']}\" type=\"{$data['enclosure']['type']}\" length=\"{$data['enclosure']['length']}\"/>
             <author>{$data['author']}</author>
         </item>
         ";
+
         $this->assertXmlStringEqualsXmlString($expect, $item->asXML()->asXML());
     }
 
@@ -303,5 +288,48 @@ class ItemTest extends TestCase
 ';
 
         $this->assertSame($expect, $item->asXML()->asXML());
+    }
+
+    /** @return array<array<array<string,mixed>>> */
+    public static function provideXmlData(): array
+    {
+        return [
+            [[
+                'title'       => "Venice Film Festival Tries to Quit Sinking",
+                'url'         => 'http://nytimes.com/2004/12/07FEST.html',
+                'description' => "Some of the most heated chatter at the Venice Film Festival this week was about the way that the arrival of the stars at the Palazzo del Cinema was being staged.",
+                'categories'  => [
+                    ["Grateful Dead", null],
+                    ["MSFT", 'http://www.fool.com/cusips'],
+                ],
+                'guid'        => "http://inessential.com/2002/09/01.php#a2",
+                'isPermalink' => true,
+                'pubDate'     => self::$now,
+                'enclosure'   => [
+                    'url'    => 'http://link-to-audio-file.com/test.mp3',
+                    'length' => 4992,
+                    'type'   => 'audio/mpeg'
+                ],
+                'author'      => 'John Smith',
+            ]],
+            [[
+                'title'       => "Venice Film Festival Tries to Quit Sinking",
+                'url'         => 'http://nytimes.com/2004/12/07FEST.html',
+                'description' => "Some of the most heated chatter at the Venice Film Festival this week was about the way that the arrival of the stars at the Palazzo del Cinema was being staged.",
+                'categories'  => [
+                    ["Grateful Dead", null],
+                    ["MSFT", 'http://www.fool.com/cusips'],
+                ],
+                'guid'        => "http://inessential.com/2002/09/01.php#a2",
+                'isPermalink' => true,
+                'pubDate'     => self::$now,
+                'enclosure'   => [
+                    'url'    => 'http://link-to-audio-file.com/test.mp3',
+                    'length' => 0,
+                    'type'   => 'audio/mpeg'
+                ],
+                'author'      => 'John Smith'
+            ]]
+        ];
     }
 }

@@ -231,11 +231,6 @@ parameters:
 			path: tests/ItemTest.php
 
 		-
-			message: "#^Method Suin\\\\RSSWriter\\\\Test\\\\ItemTest\\:\\:testAsXML\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/ItemTest.php
-
-		-
 			message: "#^Method Suin\\\\RSSWriter\\\\Test\\\\ItemTest\\:\\:testAsXML_false_permalink\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: tests/ItemTest.php
@@ -347,12 +342,12 @@ parameters:
 
 		-
 			message: "#^Parameter \\$categories of class Suin\\\\RSSWriter\\\\Item constructor expects array\\<int, string\\>, array\\<int, array\\<int, string\\|null\\>\\> given\\.$#"
-			count: 2
+			count: 1
 			path: tests/ItemTest.php
 
 		-
 			message: "#^Parameter \\$enclosure of class Suin\\\\RSSWriter\\\\Item constructor expects array\\<int, string\\>, array\\<string, int\\|string\\> given\\.$#"
-			count: 2
+			count: 1
 			path: tests/ItemTest.php
 
 		-

@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 use Suin\RSSWriter\Channel;
 use Suin\RSSWriter\SimpleXMLElement;
 
-class ChannelTest extends TestCase
+final class ChannelTest extends TestCase
 {
     private string $itemInterface = \Suin\RSSWriter\ItemInterface::class;
     private string $feedInterface = \Suin\RSSWriter\FeedInterface::class;

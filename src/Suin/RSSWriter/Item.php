@@ -167,17 +167,14 @@ class Item implements ItemInterface
             $element = $xml->addChild('enclosure');
             $element->addAttribute('url', $this->enclosure['url']);
             $element->addAttribute('type', $this->enclosure['type']);
-
-            if ($this->enclosure['length']) {
-                $element->addAttribute('length', (string)$this->enclosure['length']);
-            }
+            $element->addAttribute('length', (string)($this->enclosure['length'] ?? 0));
         }
 
-        if (!empty($this->author)) {
+        if (! empty($this->author)) {
             $xml->addChild('author', $this->author);
         }
 
-        if (!empty($this->creator)) {
+        if (! empty($this->creator)) {
             $xml->addChild('dc:creator', $this->creator,"http://purl.org/dc/elements/1.1/");
         }
 

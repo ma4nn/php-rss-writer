@@ -8,7 +8,7 @@ use Suin\RSSWriter\Channel;
 use Suin\RSSWriter\Feed;
 use Suin\RSSWriter\Item;
 
-class OutputTest extends TestCase
+final class OutputTest extends TestCase
 {
     public function testSimpleFeed(): void
     {
