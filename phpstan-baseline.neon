@@ -21,37 +21,12 @@ parameters:
 			path: src/Item.php
 
 		-
-			message: "#^Method Suin\\\\RSSWriter\\\\Item\\:\\:categories\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Item.php
-
-		-
 			message: "#^Method Suin\\\\RSSWriter\\\\Item\\:\\:categories\\(\\) has parameter \\$categories with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Item.php
 
 		-
-			message: "#^Offset 'length' on non\\-empty\\-array\\<int, string\\> on left side of \\?\\? does not exist\\.$#"
-			count: 1
-			path: src/Item.php
-
-		-
-			message: "#^Offset 'type' does not exist on non\\-empty\\-array\\<int, string\\>\\.$#"
-			count: 1
-			path: src/Item.php
-
-		-
-			message: "#^Offset 'url' does not exist on non\\-empty\\-array\\<int, string\\>\\.$#"
-			count: 1
-			path: src/Item.php
-
-		-
 			message: "#^Property Suin\\\\RSSWriter\\\\Item\\:\\:\\$categories \\(array\\<int, string\\>\\) does not accept array\\<int, array\\<int, string\\|null\\>\\|string\\>\\.$#"
-			count: 1
-			path: src/Item.php
-
-		-
-			message: "#^Property Suin\\\\RSSWriter\\\\Item\\:\\:\\$enclosure \\(array\\<int, string\\>\\) does not accept array\\<string, int\\|string\\>\\.$#"
 			count: 1
 			path: src/Item.php
 
@@ -217,11 +192,6 @@ parameters:
 
 		-
 			message: "#^Parameter \\$categories of class Suin\\\\RSSWriter\\\\Item constructor expects array\\<int, string\\>, array\\<int, array\\<int, string\\|null\\>\\> given\\.$#"
-			count: 1
-			path: tests/ItemTest.php
-
-		-
-			message: "#^Parameter \\$enclosure of class Suin\\\\RSSWriter\\\\Item constructor expects array\\<int, string\\>, array\\<string, int\\|string\\> given\\.$#"
 			count: 1
 			path: tests/ItemTest.php
 

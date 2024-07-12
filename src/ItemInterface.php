@@ -14,6 +14,7 @@ interface ItemInterface
     public function pubDate(int $pubDate): self;
     public function enclosure(string $url, int $length = 0, string $type = 'audio/mpeg'): self;
     public function author(string $author): self;
+    public function creator(string $creator): self;
     public function appendTo(ChannelInterface $channel): self;
     public function asXML(): SimpleXMLElement;
 }

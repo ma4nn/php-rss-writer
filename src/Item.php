@@ -18,14 +18,13 @@ class Item implements ItemInterface
         protected bool $isPermalink = false,
         protected int|null $pubDate = null,
 
-        /** @var list<string> */
+        /** @var array<string, int|string> */
         protected array $enclosure = [],
 
         protected string|null $author = null,
         protected string|null $creator = null,
         protected bool $preferCdata = false
-    )
-    {
+    ) {
     }
 
     public function title(string $title): self
@@ -55,10 +54,11 @@ class Item implements ItemInterface
     public function category(string $name, string|null $domain = null): self
     {
         $this->categories[] = [$name, $domain];
+
         return $this;
     }
 
-    public function categories(array $categories) 
+    public function categories(array $categories): self
     {
         foreach ($categories as $cat) {
             $domain = null;
@@ -68,6 +68,7 @@ class Item implements ItemInterface
             }
             $this->category($cat, $domain);
         }
+
         return $this;
     }
 
@@ -87,6 +88,7 @@ class Item implements ItemInterface
     public function enclosure(string $url, int $length = 0, string $type = 'audio/mpeg'): self
     {
         $this->enclosure = ['url' => $url, 'length' => $length, 'type' => $type];
+
         return $this;
     }
 

@@ -317,7 +317,7 @@ final class ItemTest extends TestCase
                     'length' => 4992,
                     'type'   => 'audio/mpeg'
                 ],
-                'author'      => 'John Smith',
+                'author'     => 'john@smith.com',
             ]],
             [[
                 'title'       => "Venice Film Festival Tries to Quit Sinking",
@@ -335,7 +335,7 @@ final class ItemTest extends TestCase
                     'length' => 0,
                     'type'   => 'audio/mpeg'
                 ],
-                'author'      => 'John Smith'
+                'author'     => 'john@smith.com'
             ]]
         ];
     }
