@@ -26,11 +26,6 @@ parameters:
 			path: src/Item.php
 
 		-
-			message: "#^Property Suin\\\\RSSWriter\\\\Item\\:\\:\\$categories \\(array\\<int, string\\>\\) does not accept array\\<int, array\\<int, string\\|null\\>\\|string\\>\\.$#"
-			count: 1
-			path: src/Item.php
-
-		-
 			message: "#^Cannot call method createCDATASection\\(\\) on DOMDocument\\|null\\.$#"
 			count: 1
 			path: src/SimpleXMLElement.php
@@ -188,11 +183,6 @@ parameters:
 		-
 			message: "#^Parameter \\#2 \\$haystack of method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\) expects string, string\\|false given\\.$#"
 			count: 6
-			path: tests/ItemTest.php
-
-		-
-			message: "#^Parameter \\$categories of class Suin\\\\RSSWriter\\\\Item constructor expects array\\<int, string\\>, array\\<int, array\\<int, string\\|null\\>\\> given\\.$#"
-			count: 1
 			path: tests/ItemTest.php
 
 		-

@@ -11,7 +11,7 @@ class Item implements ItemInterface
         protected string|null $description = null,
         protected string|null $contentEncoded = null,
 
-        /** @var list<string> */
+        /** @var list<array<string|null>> */
         protected array $categories = [],
 
         protected string|null $guid = null,
@@ -165,7 +165,7 @@ class Item implements ItemInterface
             $xml->addChild('pubDate', date(DATE_RSS, $this->pubDate));
         }
 
-        if (is_array($this->enclosure) && (count($this->enclosure) == 3)) {
+        if (count($this->enclosure) === 3) {
             $element = $xml->addChild('enclosure');
             $element->addAttribute('url', $this->enclosure['url']);
             $element->addAttribute('type', $this->enclosure['type']);
