@@ -103,7 +103,7 @@ $ composer require ma4nn/php-rss-writer
 
 The [`examples`](examples) directory contains usage examples for RSSWriter.
 
-If you want to know APIs, please see [`FeedInterface`](src/Suin/RSSWriter/FeedInterface.php), [`ChannelInterface`](src/Suin/RSSWriter/ChannelInterface.php) and [`ItemInterface`](src/Suin/RSSWriter/ItemInterface.php).
+If you want to know APIs, please see [`FeedInterface`](src/FeedInterface.php), [`ChannelInterface`](src/ChannelInterface.php) and [`ItemInterface`](src/ItemInterface.php).
 
 ## How to Test
 
