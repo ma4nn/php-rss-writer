@@ -3,12 +3,9 @@ declare(strict_types=1);
 
 namespace Suin\RSSWriter;
 
-/**
- * @package Suin\RSSWriter
- */
 class SimpleXMLElement extends \SimpleXMLElement
 {
-    public function addChild(string $qualifiedName, ?string $value = null, ?string $namespace = null): ?static
+    public function addChild(string $qualifiedName, string|null $value = null, string|null $namespace = null): ?static
     {
         if ($value !== null) {
             $value = str_replace('&', '&amp;', $value);
@@ -17,7 +14,7 @@ class SimpleXMLElement extends \SimpleXMLElement
         return parent::addChild($qualifiedName, $value, $namespace);
     }
 
-    public function addCdataChild(string $name, string $value = null, string $namespace = null): self
+    public function addCdataChild(string $name, string|null $value = null, string|null $namespace = null): self
     {
         $element = $this->addChild($name, null, $namespace);
         $dom = dom_import_simplexml($element);
