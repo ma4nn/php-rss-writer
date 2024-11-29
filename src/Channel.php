@@ -29,11 +29,6 @@ class Channel implements ChannelInterface
         return $this;
     }
 
-    /**
-     * Set channel URL
-     * @param string $url
-     * @return $this
-     */
     public function url(string $url): self
     {
         $this->url = $url;
@@ -77,11 +72,6 @@ class Channel implements ChannelInterface
         return $this;
     }
 
-    /**
-     * Set channel ttl (minutes)
-     * @param int $ttl
-     * @return $this
-     */
     public function ttl(int $ttl): self
     {
         $this->ttl = $ttl;
@@ -115,9 +105,9 @@ class Channel implements ChannelInterface
         $xml = new SimpleXMLElement('<?xml version="1.0" encoding="UTF-8" ?><channel></channel>', LIBXML_NOERROR | LIBXML_ERR_NONE | LIBXML_ERR_FATAL);
         $xml->addChild('title', $this->title);
         $xml->addChild('link', $this->url);
-        $xml->addChild('description', $this->description);
+        $xml->addCdataChild('description', $this->description);
 
-        if($this->feedUrl !== null) {
+        if ($this->feedUrl !== null) {
             $link = $xml->addChild('atom:link', '', "http://www.w3.org/2005/Atom");
             $link->addAttribute('href',$this->feedUrl);
             $link->addAttribute('type','application/rss+xml');

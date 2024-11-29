@@ -19,7 +19,7 @@ class SimpleXMLElement extends \SimpleXMLElement
         $element = $this->addChild($name, null, $namespace);
         $dom = dom_import_simplexml($element);
         $elementOwner = $dom->ownerDocument;
-        $dom->appendChild($elementOwner->createCDATASection($value));
+        $dom->appendChild($elementOwner->createCDATASection((string)$value));
 
         return $element;
     }

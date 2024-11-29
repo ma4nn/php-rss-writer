@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Suin\RSSWriter;
 
-interface ChannelInterface
+interface ChannelInterface extends Xmlable
 {
     public function title(string $title): self;
     public function url(string $url): self;
@@ -28,5 +28,4 @@ interface ChannelInterface
     public function ttl(int $ttl): self;
     public function addItem(ItemInterface $item): self;
     public function appendTo(FeedInterface $feed): self;
-    public function asXML(): SimpleXMLElement;
 }
